@@ -1,13 +1,9 @@
 package main
 
 import (
-    "fmt"
-
-    "gostocks/morestrings"
-    "github.com/google/go-cmp/cmp"
+    "gostocks/stockprice"
 )
 
 func main() {
-    fmt.Println(morestrings.ReverseRunes("!oG ,olleH"))
-    fmt.Println(cmp.Diff("Hello World", "Hello Go"))
+    stockprice.GetStockPrice()
 }
