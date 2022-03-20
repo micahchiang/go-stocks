@@ -13,6 +13,16 @@ import (
     finnhub "github.com/Finnhub-Stock-API/finnhub-go/v2"
 )
 
+type PriceInformation struct {
+    C *float32 `json:"currentPrice, omitempty"`
+    H *float32 `json:"highOfDay, omitempty"`
+    L *float32 `json:"lowOfDay, omitempty"`
+    O *float32 `json:"open, omitempty"`
+    Pc *float32 `json:"previousClose, omitempty"`
+    D *float32 `json:"change, omitempty"`
+    Dp *float32 `json:"percentChange, omitempty"`
+}
+
 func GetStockPrice() {
 
     cfg := finnhub.NewConfiguration()
@@ -31,7 +41,16 @@ func GetStockPrice() {
        if apierr != nil {
            fmt.Printf("API call failed with error: %s. \n", apierr)
        } else {
-            res, err := json.Marshal(quote)
+            currentQuote := PriceInformation {
+                C: quote.C,
+                H: quote.H,
+                L: quote.L,
+                O: quote.O,
+                Pc: quote.Pc,
+                D: quote.D,
+                Dp: quote.Dp,
+            }
+            res, err := json.Marshal(currentQuote)
             if err != nil {
                 fmt.Printf("error converting json: %s. \n", err)
             }
